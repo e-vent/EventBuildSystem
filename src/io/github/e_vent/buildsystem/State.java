@@ -2,6 +2,7 @@ package io.github.e_vent.buildsystem;
 
 import io.github.e_vent.buildsystem.textprocessor.ITextProcessor;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorLink;
+import io.github.e_vent.buildsystem.textprocessor.ProcessorSub;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorTitle;
 import io.github.e_vent.buildsystem.textprocessor.TextProcessorSystem;
 import io.github.e_vent.buildsystem.util.TextDoc;
@@ -11,6 +12,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 public final class State {
+	private static final TextProcessorSystem TEMPLATE_PROCESSOR;
+
+	static {
+		{
+			List<ITextProcessor> processors = new LinkedList<>();
+			processors.add(ProcessorSub.SINGLETON);
+			TEMPLATE_PROCESSOR = new TextProcessorSystem(processors);
+		}
+	}
+
 	private final String header;
 	private final String footer;
 	private final TextProcessorSystem docProcessor;
@@ -34,7 +45,7 @@ public final class State {
 		final String header, footer;
 		{
 			final TextDoc templateRaw = TextDoc.loadFromString(templateInput, "<template>");
-			final TextDoc templateProcessed = Constants.TEMPLATE_PROCESSOR.processDoc(templateRaw);
+			final TextDoc templateProcessed = TEMPLATE_PROCESSOR.processDoc(templateRaw);
 			header = templateProcessed.getHead();
 			footer = templateProcessed.getFoot();
 		}

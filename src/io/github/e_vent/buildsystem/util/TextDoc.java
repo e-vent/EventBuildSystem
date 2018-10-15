@@ -1,10 +1,16 @@
 package io.github.e_vent.buildsystem.util;
 
-import io.github.e_vent.buildsystem.Constants;
-
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class TextDoc {
+	private static final String DIVIDER_HEAD_MAIN = "<!--buildscriptdivider$header-content-->";
+	private static final String DIVIDER_MAIN_FOOT = "<!--buildscriptdivider$content-footer-->";
+	private static final Pattern REGEX = Pattern.compile(
+			"(.+)" + Pattern.quote(DIVIDER_HEAD_MAIN) + "(.+)" + Pattern.quote(DIVIDER_MAIN_FOOT) + "(.+)",
+			Pattern.DOTALL | Pattern.MULTILINE
+	);
+
 	private final String head;
 	private final String main;
 	private final String foot;
@@ -34,7 +40,7 @@ public final class TextDoc {
 	}
 
 	public static final TextDoc loadFromString(final String input, final String name) {
-		final Matcher matcher = Constants.REGEX.matcher(input);
+		final Matcher matcher = REGEX.matcher(input);
 		if (!matcher.matches()) {
 			throw new IllegalStateException("Doc is missing buildscript separators");
 		}

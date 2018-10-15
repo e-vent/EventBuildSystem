@@ -1,15 +1,18 @@
 package io.github.e_vent.buildsystem.util;
 
-import io.github.e_vent.buildsystem.Constants;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public final class TitleDB {
 	private final Map<String, String> titleMap;
 	private final String defaultTitle;
+
+	private static final String TITLE_SEPARATOR = "§";
+	private static final Pattern TITLE_SEPARATER = Pattern.compile(TITLE_SEPARATOR);
+	private static final Pattern LINE_SPLITTER = Pattern.compile("[\\n\\r]+");
 
 	private TitleDB(final Map<String, String> titleMap, final String defaultTitle) {
 		Objects.requireNonNull(titleMap);
@@ -36,10 +39,10 @@ public final class TitleDB {
 	public static final TitleDB loadFromString(final String input) {
 		Map<String, String> tmpTitleMap = new HashMap<>();
 		String defaultValue = null;
-		final String[] split = Constants.LINE_SPLITTER.split(input);
+		final String[] split = LINE_SPLITTER.split(input);
 		for (final String line : split) {
 			if (line.isEmpty()) continue;
-			final String[] keyValue = Constants.TITLE_SEPARATER.split(line);
+			final String[] keyValue = TITLE_SEPARATER.split(line);
 			if (keyValue.length != 2) {
 				throw new IllegalArgumentException("Expected § to appear once, separating key and value. Got: " + line);
 			}
