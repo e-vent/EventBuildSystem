@@ -9,7 +9,7 @@ public final class ProcessorSub implements ITextProcessor {
 	private static final String MIDDLE_DIVIDER = "<!--$$$BUILDSCRIPT-SUB-MIDDLE$$$";
 	private static final String END_DIVIDER = "$$$BUILDSCRIPT-SUB-END-->";
 	private static final Pattern REGEX = Pattern.compile(
-			Pattern.quote(START_DIVIDER) + ".*" + Pattern.quote(MIDDLE_DIVIDER) + "(.+)" + Pattern.quote(END_DIVIDER),
+			Pattern.quote(START_DIVIDER) + ".*?" + Pattern.quote(MIDDLE_DIVIDER) + "(.+?)" + Pattern.quote(END_DIVIDER),
 			Pattern.DOTALL | Pattern.MULTILINE
 	);
 
