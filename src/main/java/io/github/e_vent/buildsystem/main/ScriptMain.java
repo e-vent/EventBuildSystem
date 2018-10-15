@@ -52,6 +52,7 @@ public final class ScriptMain {
 			e.printStackTrace();
 			return;
 		}
+		System.err.println(state);
 		System.out.println("Ready");
 		final Path cwd = Paths.get(".");
 		try { // work
@@ -76,7 +77,7 @@ public final class ScriptMain {
 		final String name;
 		{
 			final String fileName = p.getFileName().toString();
-			name = fileName.substring(0, fileName.length() - 4);
+			name = fileName.substring(0, fileName.length() - 5);
 		}
 		System.out.print("Processing: ");
 		System.out.println(name);

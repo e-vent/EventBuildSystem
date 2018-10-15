@@ -70,4 +70,9 @@ public final class State {
 	public final TextDoc buildDoc(final TextDoc input) {
 		return this.docProcessor.processDoc(retemplateDoc(input));
 	}
+
+	public final String toString() {
+		return "buildsystem.State { header: + \"" + this.header +
+				"\" footer:\"" + this.footer + "\" TextProcessorSystem: ? }";
+	}
 }

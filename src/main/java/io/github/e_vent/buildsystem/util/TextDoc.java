@@ -44,9 +44,9 @@ public final class TextDoc {
 		if (!matcher.matches()) {
 			throw new IllegalStateException("Doc is missing buildscript separators");
 		}
-		final String head = matcher.group(0);
-		final String main = matcher.group(1);
-		final String foot = matcher.group(2);
+		final String head = matcher.group(1);
+		final String main = matcher.group(2);
+		final String foot = matcher.group(3);
 		return new TextDoc(head, main, foot, name);
 	}
 
