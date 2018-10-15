@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public final class ProcessorTitle implements ITextProcessor {
-	private static final String TARGET = "$$$BUILDSCRIPT$TITLE$$$";
-	private static final Pattern REGEX = Pattern.compile(Pattern.quote(TARGET));
+	private static final String REGEX = "\\Q$$$BUILDSCRIPT$TITLE$$$\\E";
+	private static final Pattern PATTERN = Pattern.compile(REGEX);
 
 	private final TitleDB titles;
 
@@ -20,6 +20,6 @@ public final class ProcessorTitle implements ITextProcessor {
 	public final String process(final String input, final String name) {
 		final String title = titles.getTitle(name);
 		//System.err.println("New title: " + title);
-		return REGEX.matcher(input).replaceAll(title);
+		return PATTERN.matcher(input).replaceAll(title);
 	}
 }

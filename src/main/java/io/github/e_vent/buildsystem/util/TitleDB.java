@@ -1,9 +1,7 @@
 package io.github.e_vent.buildsystem.util;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public final class TitleDB {
@@ -15,20 +13,14 @@ public final class TitleDB {
 	private static final Pattern LINE_SPLITTER = Pattern.compile("[\\n\\r]+");
 
 	private TitleDB(final Map<String, String> titleMap, final String defaultTitle) {
-		Objects.requireNonNull(titleMap);
-		Objects.requireNonNull(defaultTitle);
-		final Map<String, String> tmpTitleMap = Collections.unmodifiableMap(new HashMap<>(titleMap));
-		if (tmpTitleMap.containsKey("DEFAULT")) {
+		if (defaultTitle == null) {
+			throw new IllegalArgumentException("Default title missing");
+		}
+		if (titleMap.containsKey("DEFAULT")) {
 			throw new IllegalArgumentException();
 		}
-		tmpTitleMap.keySet().forEach(Objects::requireNonNull);
-		tmpTitleMap.values().forEach(Objects::requireNonNull);
-		this.titleMap = tmpTitleMap;
+		this.titleMap = titleMap;
 		this.defaultTitle = defaultTitle;
-	}
-
-	public final String getDefaultTitle() {
-		return defaultTitle;
 	}
 
 	public final String getTitle(final String name) {

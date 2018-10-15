@@ -1,7 +1,7 @@
 package io.github.e_vent.buildsystem.main;
 
-import io.github.e_vent.buildsystem.State;
-import io.github.e_vent.buildsystem.util.TextDoc;
+import io.github.e_vent.buildsystem.core.State;
+import io.github.e_vent.buildsystem.core.TextDoc;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,11 +10,7 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 
 public final class ScriptMain {
-	public static void main(final String[] args) {
-		run();
-	}
-
-	public static void run() {
+	public static final void main(final String[] ignore) {
 		final String templateData;
 		final String titlesData;
 		{ // read files
@@ -79,8 +75,7 @@ public final class ScriptMain {
 			final String fileName = p.getFileName().toString();
 			name = fileName.substring(0, fileName.length() - 5);
 		}
-		System.out.print("Processing: ");
-		System.out.println(name);
+		System.out.println("Processing: " + name);
 		// read input
 		final String inputContents;
 		try {

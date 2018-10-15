@@ -1,4 +1,4 @@
-package io.github.e_vent.buildsystem.util;
+package io.github.e_vent.buildsystem.core;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,32 +11,16 @@ public final class TextDoc {
 			Pattern.DOTALL | Pattern.MULTILINE
 	);
 
-	private final String head;
-	private final String main;
-	private final String foot;
-	private final String name;
+	/*packaged*/ final String head;
+	/*packaged*/ final String main;
+	/*packaged*/ final String foot;
+	/*packaged*/ final String name;
 
 	public TextDoc(final String head, final String main, final String foot, final String name) {
 		this.head = head;
 		this.main = main;
 		this.foot = foot;
 		this.name = name;
-	}
-
-	public final String getHead() {
-		return this.head;
-	}
-
-	public final String getMain() {
-		return this.main;
-	}
-
-	public final String getFoot() {
-		return this.foot;
-	}
-
-	public final String getName() {
-		return name;
 	}
 
 	public static final TextDoc loadFromString(final String input, final String name) {
@@ -52,13 +36,5 @@ public final class TextDoc {
 
 	public final String saveToString() {
 		return this.head + DIVIDER_HEAD_MAIN + this.main + DIVIDER_MAIN_FOOT + this.foot;
-	}
-
-	@Override
-	public final String toString() {
-		return "TextDoc { name: \"" + this.name +
-				"\" head: \"" + this.head +
-				"\", main: \"" + this.main +
-				"\", foot: \"" + this.foot + "\" }";
 	}
 }

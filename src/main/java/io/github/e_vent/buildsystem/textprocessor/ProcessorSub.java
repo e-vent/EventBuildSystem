@@ -5,17 +5,17 @@ import java.util.regex.Pattern;
 public final class ProcessorSub implements ITextProcessor {
 	public static final ProcessorSub SINGLETON = new ProcessorSub();
 
-	private static final String START_DIVIDER = "<!--$$$BUILDSCRIPT-SUB-START$$$-->";
-	private static final String MIDDLE_DIVIDER = "<!--$$$BUILDSCRIPT-SUB-MIDDLE$$$";
-	private static final String END_DIVIDER = "$$$BUILDSCRIPT-SUB-END-->";
-	private static final Pattern REGEX = Pattern.compile(
-			Pattern.quote(START_DIVIDER) + ".*?" + Pattern.quote(MIDDLE_DIVIDER) + "(.+?)" + Pattern.quote(END_DIVIDER),
+	private static final String START_DIVIDER_REGEX = "\\Q<!--$$$BUILDSCRIPT-SUB-START$$$-->\\E";
+	private static final String MIDDLE_DIVIDER_REGEX = "\\Q<!--$$$BUILDSCRIPT-SUB-MIDDLE$$$\\E";
+	private static final String END_DIVIDER_REGEX = "\\Q$$$BUILDSCRIPT-SUB-END-->\\E";
+	private static final Pattern PATTERN = Pattern.compile(
+			START_DIVIDER_REGEX + ".*?" + MIDDLE_DIVIDER_REGEX + "(.+?)" + END_DIVIDER_REGEX,
 			Pattern.DOTALL | Pattern.MULTILINE
 	);
 
 	@Override
 	public final String process(final String input, final String name) {
-		return REGEX.matcher(input).replaceAll("$1");
+		return PATTERN.matcher(input).replaceAll("$1");
 	}
 
 	private ProcessorSub() {}

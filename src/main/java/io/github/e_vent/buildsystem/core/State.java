@@ -1,12 +1,10 @@
-package io.github.e_vent.buildsystem;
+package io.github.e_vent.buildsystem.core;
 
 import io.github.e_vent.buildsystem.textprocessor.ITextProcessor;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorLink;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorMyname;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorSub;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorTitle;
-import io.github.e_vent.buildsystem.textprocessor.TextProcessorSystem;
-import io.github.e_vent.buildsystem.util.TextDoc;
 import io.github.e_vent.buildsystem.util.TitleDB;
 
 import java.util.LinkedList;
@@ -33,22 +31,14 @@ public final class State {
 		this.docProcessor = docProcessor;
 	}
 
-	public final String getHeader() {
-		return this.header;
-	}
-
-	public final String getFooter() {
-		return this.footer;
-	}
-
 	public static final State createState(final String templateInput, final String titlesInput) {
 		final TitleDB titles = TitleDB.loadFromString(titlesInput);
 		final String header, footer;
 		{
 			final TextDoc templateRaw = TextDoc.loadFromString(templateInput, "<template>");
 			final TextDoc templateProcessed = TEMPLATE_PROCESSOR.processDoc(templateRaw);
-			header = templateProcessed.getHead();
-			footer = templateProcessed.getFoot();
+			header = templateProcessed.head;
+			footer = templateProcessed.foot;
 		}
 		final TextProcessorSystem docProcessor;
 		{
@@ -66,15 +56,10 @@ public final class State {
 	}
 
 	private final TextDoc retemplateDoc(final TextDoc input) {
-		return new TextDoc(this.header, input.getMain(), this.footer, input.getName());
+		return new TextDoc(this.header, input.main, this.footer, input.name);
 	}
 
 	public final TextDoc buildDoc(final TextDoc input) {
 		return this.docProcessor.processDoc(retemplateDoc(input));
-	}
-
-	public final String toString() {
-		return "buildsystem.State { header: + \"" + this.header +
-				"\" footer:\"" + this.footer + "\" TextProcessorSystem: ? }";
 	}
 }
