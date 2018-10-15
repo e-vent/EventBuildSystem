@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public final class ProcessorTitle implements ITextProcessor {
-	private TitleDB titles;
-
 	private static final String TARGET = "$$$BUILDSCRIPT$TITLE$$$";
 	private static final Pattern REGEX = Pattern.compile(Pattern.quote(TARGET));
+
+	private final TitleDB titles;
 
 	public ProcessorTitle(final TitleDB titles) {
 		Objects.requireNonNull(titles);

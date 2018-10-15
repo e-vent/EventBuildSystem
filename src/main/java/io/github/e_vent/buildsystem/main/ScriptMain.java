@@ -66,7 +66,7 @@ public final class ScriptMain {
 		System.out.println("Done");
 	}
 
-	private static Predicate<Path> PATH_FILTER = p -> {
+	private static final Predicate<Path> PATH_FILTER = p -> {
 		final String name = p.getFileName().toString();
 		return name.endsWith(".html") && !name.contains("_") && !name.contains("template");
 	};
@@ -97,7 +97,7 @@ public final class ScriptMain {
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to write output file", e);
 		}
-	};
+	}
 
 	private ScriptMain() {}
 }

@@ -1,6 +1,5 @@
 package io.github.e_vent.buildsystem.textprocessor;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class ProcessorSub implements ITextProcessor {
