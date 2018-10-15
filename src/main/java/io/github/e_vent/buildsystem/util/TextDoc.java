@@ -51,7 +51,7 @@ public final class TextDoc {
 	}
 
 	public final String saveToString() {
-		return this.head + this.main + this.foot;
+		return this.head + DIVIDER_HEAD_MAIN + this.main + DIVIDER_MAIN_FOOT + this.foot;
 	}
 
 	@Override
