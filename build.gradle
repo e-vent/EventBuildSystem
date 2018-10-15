@@ -1,7 +1,20 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 mainClassName = 'io.github.e_vent.buildsystem.main.ScriptMain'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.sf.proguard:proguard-gradle:6.0.3'
+    }
+}
 
 jar {
     manifest {
@@ -9,4 +22,10 @@ jar {
                 'Main-Class': mainClassName
         )
     }
+}
+
+task proguard(type: proguard.gradle.ProGuardTask) {
+    configuration 'proguard.txt'
+    injars 'build/libs/EventBuildSystem.jar'
+    outjars 'build/obf/EventBuildSystem.jar'
 }

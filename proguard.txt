@@ -1,0 +1,4 @@
+-libraryjars  <java.home>/lib/rt.jar
+-keep public class io.github.e_vent.buildsystem.main.ScriptMain {
+      public static void main(java.lang.String[]);
+}
