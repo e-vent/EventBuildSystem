@@ -52,7 +52,7 @@ public final class ScriptMain {
 			e.printStackTrace();
 			return;
 		}
-		System.err.println(state);
+		//System.err.println(state);
 		System.out.println("Ready");
 		final Path cwd = Paths.get(".");
 		try { // work

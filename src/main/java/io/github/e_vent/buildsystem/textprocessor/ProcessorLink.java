@@ -21,7 +21,7 @@ public class ProcessorLink implements ITextProcessor {
 	private final String doReplace(final MatchResult match, final String name) {
 		final String linkTarget = match.group(1);
 		String s = name.equals(linkTarget) ? "#" : linkTarget + ".html#";
-		System.err.println("DEBUG: " + s);
+		//System.err.println("DEBUG: " + s);
 		return s;
 	}
 

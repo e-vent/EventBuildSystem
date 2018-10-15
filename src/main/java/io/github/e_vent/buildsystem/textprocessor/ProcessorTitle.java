@@ -19,7 +19,7 @@ public final class ProcessorTitle implements ITextProcessor {
 	@Override
 	public final String process(final String input, final String name) {
 		final String title = titles.getTitle(name);
-		System.err.println("New title: " + title);
+		//System.err.println("New title: " + title);
 		return REGEX.matcher(input).replaceAll(title);
 	}
 }
