@@ -2,6 +2,7 @@ package io.github.e_vent.buildsystem;
 
 import io.github.e_vent.buildsystem.textprocessor.ITextProcessor;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorLink;
+import io.github.e_vent.buildsystem.textprocessor.ProcessorMyname;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorSub;
 import io.github.e_vent.buildsystem.textprocessor.ProcessorTitle;
 import io.github.e_vent.buildsystem.textprocessor.TextProcessorSystem;
@@ -61,6 +62,7 @@ public final class State {
 	private static final void addDefaultProcessors(final List<ITextProcessor> buffer, final TitleDB titles) {
 		buffer.add(new ProcessorTitle(titles));
 		buffer.add(ProcessorLink.SINGLETON);
+		buffer.add(ProcessorMyname.SINGLETON);
 	}
 
 	private final TextDoc retemplateDoc(final TextDoc input) {
