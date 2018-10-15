@@ -43,9 +43,18 @@ public final class ScriptMain {
 				return;
 			}
 		}
-		final State state = State.createState(templateData, titlesData);
+		System.out.println("Loading");
+		final State state;
+		try { // create state
+			state = State.createState(templateData, titlesData);
+		} catch (final Exception e) {
+			System.err.println("Failed to create state");
+			e.printStackTrace();
+			return;
+		}
+		System.out.println("Ready");
 		final Path cwd = Paths.get(".");
-		try {
+		try { // work
 			Files.list(cwd).filter(PATH_FILTER).forEach(p -> work(p, state));
 		} catch (final IOException ie) {
 			System.err.println("Failed to walk file tree");
@@ -54,6 +63,7 @@ public final class ScriptMain {
 			System.err.println("Error while working on a file");
 			re.printStackTrace();
 		}
+		System.out.println("Done");
 	}
 
 	private static Predicate<Path> PATH_FILTER = p -> {
@@ -62,20 +72,26 @@ public final class ScriptMain {
 	};
 
 	private static final void work(final Path p, final State state) {
+		// take inventory
 		final String name;
 		{
 			final String fileName = p.getFileName().toString();
 			name = fileName.substring(0, fileName.length() - 4);
 		}
+		System.out.print("Processing: ");
+		System.out.println(name);
+		// read input
 		final String inputContents;
 		try {
 			inputContents = new String(Files.readAllBytes(p), "UTF-8");
 		} catch (final IOException e) {
 			throw new RuntimeException("Failed to read input file", e);
 		}
+		// transform
 		final TextDoc inputDoc = TextDoc.loadFromString(inputContents, name);
 		final TextDoc outputDoc = state.buildDoc(inputDoc);
 		final String outputContents = outputDoc.saveToString();
+		// write output
 		try {
 			Files.write(p, outputContents.getBytes());
 		} catch (IOException e) {
