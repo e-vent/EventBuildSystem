@@ -13,7 +13,8 @@ public final class Constants {
 	public static final String DIVIDER_MAIN_FOOT = "<!--buildscriptdivider$content-footer-->";
 
 	public static final Pattern REGEX = Pattern.compile(
-			"(.+)" + Pattern.quote(DIVIDER_HEAD_MAIN) + "(.+)" + Pattern.quote(DIVIDER_MAIN_FOOT) + "(.+)"
+			"(.+)" + Pattern.quote(DIVIDER_HEAD_MAIN) + "(.+)" + Pattern.quote(DIVIDER_MAIN_FOOT) + "(.+)",
+			Pattern.DOTALL | Pattern.MULTILINE
 	);
 
 	public static final String TITLE_SEPARATOR = "§";

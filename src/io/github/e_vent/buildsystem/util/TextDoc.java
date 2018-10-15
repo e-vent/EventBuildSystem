@@ -34,10 +34,13 @@ public final class TextDoc {
 	}
 
 	public static final TextDoc loadFromString(final String input, final String name) {
-		final Matcher matches = Constants.REGEX.matcher(input);
-		final String head = matches.group(0);
-		final String main = matches.group(1);
-		final String foot = matches.group(2);
+		final Matcher matcher = Constants.REGEX.matcher(input);
+		if (!matcher.matches()) {
+			throw new IllegalStateException("Doc is missing buildscript separators");
+		}
+		final String head = matcher.group(0);
+		final String main = matcher.group(1);
+		final String foot = matcher.group(2);
 		return new TextDoc(head, main, foot, name);
 	}
 
