@@ -17,14 +17,13 @@ public final class TextProcessorSystem {
 		this.processors = processors;
 	}
 
-	private final String processText(final String text, final String name) {
-		String tmp = text;
-		Objects.requireNonNull(tmp);
+	private final String processText(String text, final String name) {
+		Objects.requireNonNull(text);
 		for (final ITextProcessor processor : processors) {
-			tmp = processor.process(text, name);
-			Objects.requireNonNull(tmp);
+			text = processor.process(text, name);
+			Objects.requireNonNull(text);
 		}
-		return tmp;
+		return text;
 	}
 
 	public final TextDoc processDoc(final TextDoc doc) {
