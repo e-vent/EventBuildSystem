@@ -56,7 +56,10 @@ public final class ScriptMain {
 		}
 	}
 
-	private static Predicate<Path> PATH_FILTER = p -> p.endsWith(".html") && !p.getFileName().toString().contains("_");
+	private static Predicate<Path> PATH_FILTER = p -> {
+		final String name = p.getFileName().toString();
+		return name.endsWith(".html") && !name.contains("_") && !name.contains("template");
+	};
 
 	private static final void work(final Path p, final State state) {
 		final String name;
